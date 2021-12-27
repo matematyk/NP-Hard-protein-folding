@@ -35,8 +35,7 @@
 
 Modelowanie wielu problemów biologicznych za pomocą matematyki, czy informatyki to bardzo ciekawy dział. W samym modelowaniu naukowcy jak zwykle chcą pokonać wyzwania, które przed nimi stoją. Jednym z takich wyzwań jest rozwiązanie deterministyczne (wielomianowe) tzw. model fałdowania hydrofobowo-polarnego białka. Okazuje się, że ten model ma bardzo dużo wspólnego z informatyką teoretyczną, a dowody teoretyczne trudności jego złożoności bazują na ciekawej matematyce i redukcji do informatycznego problemu pakowania plecaka. 
 
-W tym artykule opiszę bardzo prosty model zawijania białka i przedstawię intuicje, która pokazuje, że w modelu obliczeń ten problem jest trudny do rozwiązania. Postaramy się prześledzić intuicje stojąca za ową trudnością. 
-\todo{podlinkować Niemiro}
+W tym artykule opiszę bardzo prosty model zawijania białka i przedstawię intuicje, która pokazuje, że w modelu obliczeń ten problem jest trudny do rozwiązania. Postaramy się prześledzić intuicje stojąca za ową trudnością.
 
 \mtyt{Wstęp}
 Cząsteczka białka jest tworzona przez ciąg małych składników, znanych jako aminokwasy, które ostatecznie są w stanie znaleźć się w natywnym kształcie białka. Aminokwasy są małymi cząsteczkami, które są składane razem, aby stworzyć białka. 20 różnych typów aminokwasów i ich kombinacji dodaje się do szczególnego fałdu, aby stworzyć te białka, kształt, w który ostatecznie zamieniają się bezpośrednio korelując z jego zastosowaniem.  Możemy myśleć o tym jako o różnych smakach, które łączą się ze sobą jak koraliki na sznurku, tworząc długie łańcuchy, które nazywamy polipeptydami, a te są budulcem białek. A naprawdę fajną rzeczą w aminokwasach jest to, że kiedy są ze sobą połączone, składają się, aby nadać ostateczny kształt białku. I to właśnie kształt białka tak naprawdę dyktuje, co może ono robić w komórce.
@@ -54,7 +53,7 @@ Konformacje można reprezentować jako przekształcenie różnowartościowe $\om
      1 \leq i<j \leq n: \omega(i) \neq \omega(j)
 \end{equation}
 Intuicyjnie jest to trasa losowego spaceru długości $n$ wzdłuż siatki z ważną własności: spacer nie przecinał swojego dawnego toru, ani nie wraca z punktu z którego właśnie wyszedł. \marg{Taki spacer nazywa się z ang. Self Avoiding Walk, w skrócie SAW.}
-Celem rozwiązania problemu składania białek jest znalezienie takiej konformacji sekwencji białek na siatce, aby energia całkowita $E_{c}$ była zminimalizowana, dla pewnej rozsądnej definicji energii zależnej od włożenia w kratę i sekwencji typów aminokwasów. W naszym przypadku uproszczamy tę definicje
+Celem rozwiązania problemu składania białek jest znalezienie takiej konformacji sekwencji białek na siatce, aby energia całkowita $E_{c}$ była zminimalizowana, dla pewnej rozsądnej definicji energii zależnej od włożenia w kratę i sekwencji typów aminokwasów. W naszym przypadku uproszczamy tę definicje:
 \begin{equation}\label{eq:main}
     \mathrm{E_{c}}(s, \omega)=\sum_{1 \leq i<j \leq n} E_{(s_{i}, s_{j})} \Delta(\omega(i), \omega(j)),
 \end{equation}
@@ -80,26 +79,29 @@ Zauważmy, że energia całkowita skręcenia jest negacją liczby wiązań $H \e
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{diagram.png}
-    \caption{Przykład włożenia sekwencji $s={HPPHPH}$ w kratę płaską. Po lewej stronie energia całkowita jest równa -1, a po prawej stronie energia całkowita jest równa -2.}
+    \caption{Przykład włożenia sekwencji $s={HPPHPH}$ w kratę płaską. Po lewej stronie energia całkowita jest równa -1, a po prawej stronie energia całkowita jest równa -2. Co więcej okazuje się, że jest to optymalne globalne rozwiązanie. }
 \end{figure}
 
 W tradycyjnym modelu pary $H$-ów z sekwencji $s$ nie są liczone jako formująca wiązanie. Dla uproszczenia, możemy dodać pary $H$-ów w liczeniu energii. Konwencja nie zależy w żaden sposób nie wpływa przy ustalonej sekwencji na minimalizacje energii. 
-
 \mtyt{Trudność tego modelu}
-Warto się zastanowić dlaczego ten problem jest ciężki obliczeniowo. Intuicyjnie wydaje się, ze mamy kombinatoryczną własność generowania tras losowych spacerów. Jednak widać, że takich tras jest stosunkowo dużo. \marg{Więcej jak estymować ilość takich tras jest w artykule: Monte Carlo, Spacery I Polimery} 
-Teraz warto się zastanowić, jak do takich problemów można podchodzić. Pytając się o złożoność danego problemu, potrzeba jest podać ścisłe jego sformułowanie. Przedstawmy teraz to ściślej. 
-\newline 
-\textbf{Problem zawinięcia sekwencji}
-\newline Wejście: Mając daną sekwencje $s \in \{H,P\}^{n}$ oraz liczbę naturalną $m$ i kratę $L=\mathbb{Z}^3$. 
 
-\textit{Pytanie:} Czy istnieje zawinięcie sekwencji $s \in \{H,P\}^{n}$ w kracie $
+
+Warto się zastanowić dlaczego ten problem jest ciężki obliczeniowo. Intuicyjnie wydaje się, ze mamy kombinatoryczną własność generowania tras losowych spacerów. Jednak widać, że takich tras jest stosunkowo dużo. \marg{} \marg{Więcej jak estymować ilość takich tras jest w artykule: \href{http://www.deltami.edu.pl/temat/matematyka/zastosowania/2015/04/19/Monte_Carlo_spacery_i_polimery/}{Monte Carlo, Spacery I Polimery prof. Niemiro}} 
+
+Wyżej opisany problem jest problemem obliczeniowych - szukamy minimum funkcji energii. Zastanowimy się, czy potrafimy przeformułować to w problem decyzyjny. Podajmy jego ścisłe sformułowanie.
+
+\textbf{Problem zawinięcia sekwencji}
+
+\newline Wejście: Ustalona sekwencja $s \in \{H,P\}^{n}$, liczbę naturalna $m \in \mathbb{N}$ i kratę $L=\mathbb{Z}^3$. 
+
+\textbf{Pytanie} Czy istnieje zawinięcie sekwencji $s \in \{H,P\}^{n}$ w kracie $
 \mathbb{Z}^3$, gdzie ilość połączeń $H \edge H$ jest przynajmniej $m$? 
 
-Istotne jest tutaj określenie trudności tego modelu, czyli potwierdzenie intuicji, że nie umiemy znaleźć szybkiego deterministycznego rozwiązania\marg{Jest to jeden z sformułowań wielkiej hipotezy P=NP.}. Naszym celem będzie prześledzenie rozumowania z tym związanego. 
+Istotne jest tutaj określenie trudności tego modelu, czyli potwierdzenie intuicji, że nie umiemy znaleźć szybkiego deterministycznego rozwiązania. Naszym celem będzie prześledzenie rozumowania z tym związanego. 
 
 
 \todo{zastanów jak podkreslić się tych sąsiadująych}
-Warto się zastanowić nad możliwym algorytmem. Zauważmy, że odpowiedź na to pytanie, może rozwiązać problem poszukiwania minimalnej energii z równania \ref{eq:mai}. 
+Zauważmy, ze algorytm rozwiązujący problem zawinięcia sekwencji może zostać wykorzystany w problem poszukiwania minimalnej energii z równania \ref{eq:mai}. Mając algorytm rozwiązujący problem zawijania sekwencji możemy uruchomić go skończenie wiele razy, by uzyskać informacje o minimalnej energii. Dochodzimy do momentu, kiedy algorytm odpowiada nam przecząco, że sekwencja nie istnieje i wtedy kończymy wykonywanie się programu.  
 
 Po chwili dłuższego namysłu okaże się, że nie jest to w cale prosty problem. Nie ma efektywnego algorytmu \marg{Działający w czasie wielomianowym względem długości sekwencji}. 
 Rozważając to pytanie ciężko stwierdzić w jaki sposób dobrać algorytm, aby umiał odpowiedzieć prosto na zadane pytanie. Oczywiście można przetestować bardzo brutalnie wszystkie konfiguracje. Jednak dla stosunkowo małych rozmiarów sekwencji problem staje się obliczeniowo niemożliwy do rozwiązania. 
