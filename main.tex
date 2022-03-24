@@ -31,15 +31,15 @@
 
 \marg{[1] Student Wydziału Matematyki, Informatyki i Mechaniki, Uniwersytet Warszawski, [2] Sano Centrum Medycyny Obliczeniowej w Krakowie}
 
-Modelowanie wielu problemów biologicznych za pomocą matematyki czy informatyki to bardzo ciekawy dział. W samym modelowaniu naukowcy jak zwykle chcą pokonać wyzwania, które przed nimi stoją. Jednym z takich wyzwań jest rozwiązanie deterministyczne (wielomianowe), tzw. model fałdowania hydrofobowo-polarnego białka. Okazuje się, że ten model ma bardzo dużo wspólnego z informatyką teoretyczną, a sam problem jest trudny do rozwiązania. 
+Modelowanie wielu problemów biologicznych za pomocą matematyki czy informatyki to bardzo ciekawy dział. W samym modelowaniu naukowcy jak zwykle chcą pokonać wyzwania, które przed nimi stoją. Jednym nich jest rozwiązanie deterministyczne (wielomianowe), tzw. model fałdowania hydrofobowo-polarnego białka. Okazuje się, że ten model ma bardzo dużo wspólnego z informatyką teoretyczną, a sam problem jest trudny do rozwiązania. 
 
-W tym artykule opiszemy bardzo prosty model zawijania białka i jego interpretacje w informatyce teoretycznej. 
+W tym artykule zostanie opisany bardzo prosty model zawijania białka i jego interpretacje w informatyce teoretycznej. 
 
 \mtyt{Wstęp}
-Cząsteczka białka jest tworzona przez ciąg małych cegiełek, znanych jako aminokwasy, które ostatecznie są w stanie zmienić się w natywny kształt białka. Aminokwasy to małe cząsteczki,  stanowiące główny budulec białka. Połączone razem tworzą białka.  Wyróżniamy dwadzieścia aminokwasów, które zwijają się w określoną funkcjonalną strukturę przestrzenną, złożoną z tzw. $\alpha$-heliks, $\beta-$-wstążek oraz pętli. Te podstawowe struktury w połączeniu ze sobą tworzą bardziej złożone przestrzennie elementy, jak na przykład $\beta-$kartka uformowana z kilku $\beta$-wstążek czy tzw. 'szpilka do włosów' (ang. hairpin loop), która składa się z antyrównoległej struktury $\beta$ podtrzymywanej przez pojedynczy łańcuch polipeptydowy. Przywołuje to na myśl zbiór koralików, które nawleczone na sznurek tworzą długi łańcuch. Analogicznie, tworząc długie łańcuchy, a te z kolei stanowią budulec białek. Interesującą cechą aminokwasów jest to, że właśnie one przez sposób w jaki się ze sobą składają nadają białku ostateczny kształt. To właśnie kształt białka dyktuje, co może ono robić w komórce oraz sposób oddziaływania z innymi elementami w komórce.
+Cząsteczka białka jest tworzona przez ciąg małych cegiełek, znanych jako aminokwasy, które ostatecznie są w stanie zmienić się w natywny kształt białka. Aminokwasy to małe cząsteczki,  stanowiące główny budulec białka. Wyróżniamy dwadzieścia aminokwasów, które zwijają się w określoną funkcjonalną strukturę przestrzenną, złożoną z tzw. $\alpha$-heliks, $\beta-$-wstążek oraz pętli. Te podstawowe struktury w połączeniu ze sobą tworzą bardziej złożone przestrzennie elementy, jak na przykład $\beta-$kartkę uformowaną z kilku $\beta$-wstążek czy tzw. 'szpilki do włosów' (ang. hairpin loop), która składa się z antyrównoległej struktury $\beta$ podtrzymywanej przez pojedynczy łańcuch polipeptydowy. Omówione konfiguracje przywołują to na myśl zbiór koralików, które nawleczone na sznurek łączą się w długi łańcuch. Analogicznie, aminokwasy tworzące długie łańcuchy, które stanowią budulec białek. Interesującą cechą aminokwasów jest to, że właśnie one przez sposób w jaki się ze sobą składają nadają białku ostateczny kształt. To właśnie nadaje białku ostateczny kształt, który decyduje o funkcji białka w komórce oraz o tym jak oddziałuje ono z innymi elementami w komórce. 
 
-Istnieje wiele możliwości odtworzenia kształtu białka występującego w naturze. Jako tzw. złoty standard używa się krystalografii, która jest metodą eksperymentalną odtwarzania kształtu przestrzennego białka w danych warunkach, jest to metoda bardzo czasochłonna i czasem nieskuteczna. Wynika to z faktu, że uchwycenie kształtu białka nie zawsze jest możliwe, gdy może się ono okazać bardzo wrażliwe na czynniki zewnętrzne i niestabilne w laboratorium. W praktyce oznacza to, ze rozpadnie się na kawałki przed odtworzeniem jego kształtu. 
-Dlatego zaprzęgnięto metody obliczeniowe do modelowania komputerowego struktur 3D białek. Podstawą takiego modelowania teoretycznego są istniejące już struktury białek (wcześniej eksperymentalnie odtworzone za pomocą krystalografii, zebrane w bazie białek PDB www.rcsb.org). Wraz ze wzrostem naszych możliwości obliczeniowych i coraz to nowszych dostępnych metod tworzone są nowe techniki odtwarzania struktur 3D. 
+Istnieje wiele możliwości odtworzenia kształtu białka występującego w naturze. Jako tzw. złoty standard używa się krystalografii, która jest metodą eksperymentalną odtwarzania kształtu przestrzennego białka w danych warunkach. Jest to metoda bardzo czasochłonna i nie zawsze skuteczna, gdy uchwycenie białka bywa niemożliwe. co wynika z fakty, że białko może się okazać bardzo wrażliwe, a w konsekwencji niestabilne w laboratorium. W praktyce oznacza to, ze rozpadnie się na kawałki przed odtworzeniem jego kształtu. 
+Dlatego zaprzęgnięto metody obliczeniowe do modelowania komputerowego struktur 3D białek. Podstawą takiego modelowania teoretycznego są istniejące już struktury białek (wcześniej eksperymentalnie odtworzone za pomocą krystalografii, zebrane w bazie białek PDB www.rcsb.org). Wraz ze wzrostem możliwości obliczeniowych i coraz szerszym dostępem do nowych metod tworzone są nowe techniki odtwarzania struktur 3D. 
 Duże zainteresowanie mediów w ostatnich latach zyskał projekt AlphaFold (\href{https://alphafold.ebi.ac.uk}{alphafold.ebi.ac.uk}), w którym użyta została sztuczna inteligencja (AI) do przewidywania struktur białek.
 
 \mtyt{Model hydrofobowy-polarny(HP)}
@@ -54,37 +54,36 @@ Celem rozwiązania problemu składania białek jest znalezienie takiej konformac
 \begin{equation}\label{basic:eng}
     \mathrm{E_{c}}(s, \omega)=\sum_{1 \leq i<j \leq n} E_{(s_{i}, s_{j})} \Delta(\omega(i), \omega(j)),
 \end{equation}
-Stosując wartość równą karę energetyczną $-1$ dla sąsiednich wiązań $H \edge H$: 
+stosując wartość równą karę energetyczną $-1$ dla sąsiednich wiązań $H \edge H$: 
 \begin{equation}
     E_{(s_{i}, s_{j})} = \begin{cases}
         -1 & s_{i}=H \text{ i } s_{j}=H \\ 
-        0 & \text{w przeciwnym przypadku} 
+        0 & \text{w przeciwnym przypadku}
     \end{cases}   
 \end{equation}
 
-I odpowiednią funkcją kodująca liczenie energii dla punktów ze sobą sąsiadujących:
+i odpowiednią funkcją kodująca liczenie energii dla punktów ze sobą sąsiadujących:
 \begin{equation}
     \Delta(\omega(i), \omega(j)) = 
     \begin{cases}
         0 & $\omega(i)$ \text{ i } $\omega(j)$ \text{ są sąsiadami w kracie} \\
-        1 &  \text{w przeciwnym przypadku}
+        1 &  \text{w przeciwnym przypadku}.
     \end{cases}
 \end{equation}
-Warto zauważyć, że energia całkowita zwijania jest negacją liczby wiązań $H \edge H$. W tradycyjnym modelu pary $H$-ów z sekwencji $s$ nie są liczone jako formujące wiązanie. Dla uproszczenia, możemy dodać pary $H$-ów w liczeniu energii. Konwencja nie zależy w żaden sposób nie wpływa przy ustalonej sekwencji na minimalizacje energii. 
+Warto zauważyć, że energia całkowita zwijania jest negacją liczby wiązań $H \edge H$. W tradycyjnym modelu pary $H$-ów z sekwencji $s$ nie są liczone jako formujące wiązanie. Dla uproszczenia można dodać pary $H$-ów w liczeniu energii. Uproszczenie w żaden sposób nie wpływa przy ustalonej sekwencji na rozwiązanie. 
  \marg{Czyli takie punktu sąsiadujące, pomiędzy którymi nie ma trasy, pomimo tego są tam dwa H'sy.}
 
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.9\textwidth]{diagram.png}
-    \caption{Przykład konformacji dla sekwencji $s={HPPHPH}$ w kracie $\mathbb{Z}^{2}$. Po lewej stronie energia całkowita jest równa $-1$, a po prawej stronie jest równa $-2$. Co więcej okazuje się, że jest to optymalne globalne rozwiązanie. }
+    \caption{Przykład konformacji dla sekwencji $s={HPPHPH}$ w kracie $\mathbb{Z}^{2}$. Po lewej stronie energia całkowita jest równa $-1$, a po prawej stronie $-2$. Konformacja po prawej stronie okazuje się, że jest to optymalne globalne rozwiązanie. }
 \end{figure}
 
 
 \textbf{Algorytm losujący}
 
-Jeden z pomysłów, który się nasuwa to myślenie o konformacji jako o trasie losowego spaceru długości $n$ wzdłuż siatki $\mathbb{Z}^{3}$ przy założeniu, że spacer nie przecinał swojego dawnego toru, ani nie wraca z punktu z którego właśnie wyszedł. Każdemu punktowi przypisana jest literka $H$ lub $P$, która jest pobrana z sekwencji $s$. Po angielsku taka droga nazywa się \textit{Self Avoiding Walk}, w skrócie SAW. Losowanie takich spacerów to generowanie konformacji. W ten sposób można obliczać energię dla konformacji. Ten sposób działania nie daje jednak pewności, że algorytm losujący znajdzie minimum energii. Co więcej dla przypadku kraty $\mathbb{Z}^3$ okazuje się, że spacerując losowo mamy za dużo wyboru w każdym kroku i jest bardzo trudno zawinąć sekwencje, tak aby uzyskać globalne minimum. 
-
+Jeden z pomysłów, który się nasuwa to myślenie o konformacji jako o trasie losowego spaceru długości $n$ wzdłuż siatki $\mathbb{Z}^{3}$ przy założeniu, że spacer nie przecina swojego dawnego toru, ani nie wraca z punktu wyjściowego. Każdemu punktowi przypisana jest literka $H$ lub $P$, która jest pobrana z sekwencji $s$. Po angielsku taka droga nazywa się \textit{Self Avoiding Walk}, w skrócie SAW. Losowanie takich spacerów to generowanie konformacji. W ten sposób można obliczać energię dla konformacji. Ta metoda  działania nie daje jednak pewności, że algorytm losujący znajdzie globalne minimum energii. Co więcej dla przypadku kraty $\mathbb{Z}^3$ okazuje się, że spacerując w każdym kroku występuje za dużo możliwości wyboru, co sprawia, że trudno zawinąć sekwencje do uzyskania globalnego minimum. 
 
 Samą liczbę konformacji można jedynie oszacować. Podanie dokładnej liczby jest niemożliwe, chyba że dla bardzo małych przypadków $k=\{1,2\}$. Możliwym sposobem oszacowania jest metoda wzrostu zaproponowana przez Ariannę i Marshalla Rosenbluthów. Więcej w artykule opublikowanym w \textit{Delta} $\Delta_{15}^{6}$. Dla małych $n \in \{1,2,3\}$ można policzyć takie konformacje za pomocą kartki i ołówka. Dla większych wymiarów staje się to niemożliwe. 
 \begin{table}[!htbp]
@@ -102,32 +101,32 @@ Samą liczbę konformacji można jedynie oszacować. Podanie dokładnej liczby j
     \end{tabular}
     \caption{Oszacowanie liczby konformacji dla kraty $\mathbb{Z}^3$}
 \end{table} 
-\marg{Więcej jak estymować ilość takich tras jest w artykule z delty ($\Delta_{15}^{5}$): \href{http://www.deltami.edu.pl/temat/matematyka/zastosowania/2015/04/19/Monte_Carlo_spacery_i_polimery/}{Monte Carlo, Spacery I Polimery prof. Niemiro}}  
+\marg{Więcej jak estymować ilość takich tras jest w artykule opublikowanym w "Delcie" ($\Delta_{15}^{5}$): \href{http://www.deltami.edu.pl/temat/matematyka/zastosowania/2015/04/19/Monte_Carlo_spacery_i_polimery/}{Monte Carlo, Spacery I Polimery prof. Niemiro}}  
 Zauważmy, że liczba takich konformacji dla liczby $k>10$ znacząco rośnie. To pokazuje, że problem już dla stosunkowo małych $k$ staje się trudny do rozwiązania. 
 
 
 \mtyt{Trudność tego modelu}
-W informatyce teoretycznej wiele problemów wyraża się jako problemy decyzyjne. Jednak wyżej sformułowany problem jest problemem obliczeniowym - szukamy minimum funkcji energii zadanej tak jak w równaniu \ref{basic:eng}. Zastanowimy się, czy potrafimy przeformułować to w problem decyzyjny i później w problem obliczeniowy. Podajmy jego ścisłe sformułowanie.
+W informatyce teoretycznej wiele problemów wyraża się jako problemy decyzyjne. Jednak wyżej sformułowany problem jest problemem obliczeniowym - szukamy minimum funkcji energii zadanej tak jak w równaniu \ref{basic:eng}. Warto się zastanowić czy możliwe jest przeformułowanie omawianego problemu w problem decyzyjny, a później w problem obliczeniowy. W tym celu na początku należy ściśle sformułować problem. 
 
 
 \textbf{Problem zawinięcia sekwencji} 
 \newline
 Na początku formujemy wejście tak jak w klasycznym algorytmie. 
-\newline Wejście: Ustalona sekwencja $s \in \{H,P\}^{k}$, liczbę naturalna $m \in \mathbb{N}$ i kratę $L=\mathbb{Z}^3$. 
+\newline \textbf{Wejście}: Ustalona sekwencja $s \in \{H,P\}^{k}$, liczbę naturalna $m \in \mathbb{N}$ i kratę $L=\mathbb{Z}^3$. 
 
-I formujemy odpowiednie pytanie. \newline  
-\textbf{Pytanie} Czy istnieje zawinięcie sekwencji $s \in \{H,P\}^{k}$ w kracie $
+Następnie formujemy następujące pytanie  \newline  
+\textbf{Pytanie:} Czy istnieje zawinięcie sekwencji $s \in \{H,P\}^{k}$ w kracie $
 \mathbb{Z}^3$, gdzie ilość połączeń $H \edge H$ jest przynajmniej $m$? 
 
-Istotne jest tutaj określenie trudności tego pytania, czyli potwierdzenie intuicji, że nie umiemy znaleźć szybkiego deterministycznego rozwiązania. Dla zainteresowanego czytelnika techniczne detale można znaleźć w artykule: \textit{'Protein Folding in the Hydrohobic-Hydorplilic HP Model is NP-Complete'} autorstwa Bonniego Bergera i Toma Leightona. 
+Istotne jest tutaj określenie trudności tego pytania, czyli potwierdzenie intuicji, że znalezienie szybkiego deterministycznego rozwiązania nie jest możliwe.  Dla zainteresowanego czytelnika techniczne detale można znaleźć w artykule: \textit{'Protein Folding in the Hydrohobic-Hydorplilic HP Model is NP-Complete'} autorstwa Bonniego Bergera i Toma Leightona. 
 
 
-Zauważmy, że \textit{algorytm rozwiązujący problem zawinięcia sekwencji} może zostać wykorzystany w problem poszukiwania minimalnej energii z równania \ref{basic:eng}. Mając algorytm rozwiązujący problem zwijania się białek, możemy uruchomić go skończenie wiele razy, by uzyskać informacje o minimalnej energii. Dochodzimy do momentu, kiedy algorytm odpowiada nam przecząco, że sekwencja nie istnieje i wtedy kończymy wykonywanie się programu. Jednak nie udało się na ten moment pokazać algorytmu deterministycznego rozwiązującego ten problem w wielomianowym czasie ze względu na $k$. 
+Warto zauważyć, że \textit{algorytm rozwiązujący problem zawinięcia sekwencji} może zostać wykorzystany w problemie poszukiwania minimalnej energii z równania \ref{basic:eng}. Mając algorytm rozwiązujący problem zwijania się białek, można go uruchomić skończenie wiele razy, zwiększając $m$, by uzyskać informacje o minimalnej energii. W końcu nastąpi moment kiedy odpowiedź będzie przecząca, co wskażę takie $m$, które jest rozwiązaniem problemu obliczeniowego. 
 
-Rozważając to pytanie, trudno stwierdzić w jaki sposób dobrać algorytm, aby umiał odpowiedzieć prosto na zadane pytanie. Oczywiście można przetestować bardzo brutalnie wszystkie konfiguracje. Jednak już dla stosunkowo małego rozmiaru sekwencji $k$ problem staje się obliczeniowo niemożliwy do rozwiązania, ponieważ konfiguracje rosną wykładniczo ze względu na $k$.
+Rozważając problem zawinięcia sekwencji, trudno stwierdzić w jaki sposób dobrać algorytm, aby umiał odpowiedzieć szybko na zadane pytanie. Oczywiście można przetestować bardzo brutalnie wszystkie konfiguracje. Jednak już dla stosunkowo małego rozmiaru sekwencji $k$ problem staje się obliczeniowo niemożliwy do rozwiązania, ponieważ konfiguracje rosną wykładniczo ze względu na $k$, co zostało już przedstawione w tablicy 1. 
 
-Do pokazania trudności stosuje się ciekawy trik, wprowadza się pewien ogólniejszy problem decyzyjny, który co się okaże jest specjalnym przypadkiem problemu zawinięcia sekwencji. Jeśli ten przypadek okaże się dosyć trudny, to oznacza, że nasz problem także jest trudny. 
-Sam HP model nie ma rozwiązania wielomianowego ze względu na długość $k$. Oszacowanie liczby konformacji pokazuje, że jest to problem dosyć złożony. 
+Do pokazania trudności stosuje się ciekawy trik, który polega na wprowadzeniu pewnego ogólniejszego problemu decyzyjnego, który się później okaże, jest specjalnym przypadkiem problemu zawinięcia sekwencji. Jeśli ten przypadek okaże się dosyć trudny, to oznacza, że nasz problem także jest trudny. 
+Sam model HP nie ma rozwiązania wielomianowego ze względu na długość $k$. Oszacowanie liczby konformacji pokazuje, że jest to problem dosyć złożony, a szybkie deterministyczne rozwiązanie na ten moment nie istnieje. 
 
 
 
