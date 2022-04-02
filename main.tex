@@ -31,7 +31,7 @@
 
 \marg{[1] Student Wydziału Matematyki, Informatyki i Mechaniki, Uniwersytet Warszawski, [2] Sano Centrum Medycyny Obliczeniowej w Krakowie}
 
-Modelowanie problemów biologicznych za pomocą matematyki czy informatyki to bardzo ciekawy dział. W samym modelowaniu naukowcy jak zwykle chcą pokonać wyzwania, które przed nimi stoją. Jednym z nich jest znalezienie efektywnego algorytmu rozwiązującego tzw. model fałdowania hydrofobowo-polarnego białka. Okazuje się, że ten model ma bardzo dużo wspólnego z informatyką teoretyczną, a sam problem jest trudny do rozwiązania. 
+Modelowanie problemów biologicznych za pomocą matematyki czy informatyki to bardzo ciekawy dział. W samym modelowaniu naukowcy jak zwykle chcą pokonać wyzwania, które przed nimi stoją. Jednym z nich jest znalezienie efektywnego algorytmu rozwiązującego tzw. model fałdowania hydrofobowo-polarnego białka. Okazuje się, że ten model ma bardzo wspólnego z informatyką teoretyczną, a sam problem jest trudny do rozwiązania. 
 
 W tym artykule opiszemy bardzo prosty model zawijania białka i jego interpretacje w informatyce teoretycznej. 
 
@@ -70,8 +70,8 @@ i odpowiednią funkcją kodująca liczenie energii dla punktów ze sobą sąsiad
         0 &  \text{w przeciwnym przypadku}.
     \end{cases}
 \end{equation}
-Warto zauważyć, że energia całkowita zwijania jest negacją liczby wiązań $H \edge H$. W tradycyjnym modelu pary $H$-ów z sekwencji $s$ nie są liczone jako formujące wiązanie. Dla uproszczenia można dodać pary $H$-ów w liczeniu energii. Uproszczenie w żaden sposób nie wpływa przy ustalonej sekwencji na rozwiązanie. 
- \marg{Czyli takie punktu sąsiadujące, pomiędzy którymi nie ma trasy, pomimo tego są tam dwa H'sy.}
+Wzór z $\ref{basic:eng}$ należy tak interpretować, ustaloną sekwencje $s$ zginamy w kracie $L$ przypisując każdemu punktowi literki z $s$. Następnie obliczamy ilość punktów sąsiadujących które mają przypisane dwie literki $H$.
+W tradycyjnym modelu pary $H$-ów z sekwencji $s$ nie są liczone jako formujące wiązanie. Dla uproszczenia można dodać pary $H$-ów w liczeniu energii. Uproszczenie w żaden sposób nie wpływa przy ustalonej sekwencji na rozwiązanie. 
 
 
 \begin{figure}[!htbp]
@@ -89,7 +89,7 @@ Samą liczbę zagięć można jedynie oszacować. Podanie dokładnej liczby jest
 \begin{table}[!htbp]
     \centering
     \begin{tabular}{c|c}
-      długość sekwencji $k$   &  oszacowanie liczby zagięc \\
+      długość sekwencji $k$   &  oszacowanie liczby zagięć \\
        1  & 6 \\
        2  & 30 \\ 
        3  & 150 \\
@@ -121,11 +121,11 @@ Następnie formujemy następujące pytanie  \newline
 Istotne jest tutaj określenie trudności tego pytania, czyli potwierdzenie intuicji, że znalezienie szybkiego deterministycznego rozwiązania nie jest możliwe. Dla zainteresowanego czytelnika techniczne detale można znaleźć w artykule: \textit{'Protein Folding in the Hydrohobic-Hydorplilic HP Model is NP-Complete'} autorstwa Bonniego Bergera i Toma Leightona. 
 
 
-Warto zauważyć, że \textit{algorytm rozwiązujący problem zawinięcia sekwencji} może zostać wykorzystany w problemie poszukiwania minimalnej energii z równania \ref{basic:eng}. Mając algorytm rozwiązujący problem zwijania się białek, można go uruchomić skończenie wiele razy, zwiększając $m$, by uzyskać informacje o minimalnej energii. W końcu nastąpi moment kiedy odpowiedź będzie przecząca, co wskażę takie $m$, które jest rozwiązaniem problemu obliczeniowego. 
+Warto zauważyć, że algorytm rozwiązujący \textit{problem zawinięcia sekwencji} może zostać wykorzystany w problemie poszukiwania minimalnej energii z równania \ref{basic:eng}. Mając algorytm rozwiązujący problem zwijania się białek, można go uruchomić skończenie wiele razy, zwiększając $m$, by uzyskać informacje o minimalnej energii. W końcu nastąpi moment kiedy odpowiedź będzie przecząca, co wskażę takie $m$, które jest rozwiązaniem problemu obliczeniowego. 
 
 Rozważając problem zawinięcia sekwencji, trudno stwierdzić w jaki sposób dobrać algorytm, aby umiał odpowiedzieć szybko na zadane pytanie. Oczywiście można przetestować bardzo brutalnie wszystkie konfiguracje. Jednak już dla stosunkowo małego rozmiaru sekwencji $k$ problem staje się obliczeniowo niemożliwy do rozwiązania, ponieważ konfiguracje rosną wykładniczo ze względu na $k$, co zostało już przedstawione w tablicy 1. 
 
-Do pokazania trudności stosuje się ciekawy trik, który polega na wprowadzeniu pewnego ogólniejszego problemu decyzyjnego, który się później okaże, jest specjalnym przypadkiem problemu zawinięcia sekwencji. Jeśli ten przypadek okaże się dosyć trudny, to oznacza, że nasz problem także jest trudny.  Oszacowanie liczby zagięć pokazuje, że jest to problem dosyć złożony.  
+Do pokazania trudności stosuje się ciekawy trik, który polega na wprowadzeniu pewnego ogólniejszego problemu decyzyjnego, który się później okaże, jest specjalnym przypadkiem problemu zawinięcia sekwencji. Jeśli ten przypadek okaże się dosyć trudny, to oznacza, że nasz problem także jest trudny. 
 
 
 \end{document}
