@@ -37,7 +37,7 @@ Aminokwasy to małe cząsteczki, stanowiące główny budulec białka.
 Można o nich myśleć jak o koralikach nawleczonych na sznurek, a sposób ich ułożenia w przestrzeni
 decyduje o funkcji białka w komórce oraz o tym, jak oddziałuje ono z innymi
 elementami komórki. Z tego względu struktura przestrzenna danego białka jest dla
-badaczy bardzo pożądaną informacją.
+badaczy bardzo pożądaną informacją min. w przypadku projektowania leków.
 
 Istnieje wiele możliwości odtworzenia kształtu białka występującego w naturze.
 Jedną z bardziej standardowych jest ,,hodowla'' cząsteczki w warunkach
@@ -100,7 +100,7 @@ całkowitej.
 }
 
 Dla krótkich sekwencji aminokwasów (tzn. niewielkich wartości $k$) optymalne
-zagięcie można odnaleźć, obliczając energię każdego możliwego zagięcia. 
+zagięcie można odnaleźć, obliczając energię każdego możliwego zagięcia. W praktyce długości sekwencji wahają się pomiędzy $50$ do ponad $1500$ aminokwasów. 
 Liczba możliwych zagięć rośnie jednak bardzo szybko wraz ze wzrostem $k$! W
 tabelce na marginesie przedstawiono liczbę zagięć w kracie $\Z^3$ dla wybranych
 wartości $k$.
@@ -143,12 +143,14 @@ minimalnej energii zagięcia. Okazuje się jednak, że nasze decyzyjne zadanie j
 problemem NP-zupełnym, czego dowód znajduje się w artykule \textit{Protein Folding in the Hydrohobic-Hydorplilic HP Model is
 NP-Complete} autorstwa Bonniego Bergera i Toma Leightona. 
 W szczególności, nie istnieje szybki algorytm rozwiązujący nasz wyjściowy
-problem odnajdywania optymalnego zawinięcia sekwencji aminokwasów.
+problem odnajdywania optymalnego zawinięcia sekwencji aminokwasów. 
 
 Do pokazania trudności stosuje się ciekawy trik, który polega na wprowadzeniu
 pewnego ogólniejszego problemu decyzyjnego, który się później okaże, jest
-specjalnym przypadkiem problemu zawinięcia sekwencji. Jeśli ten przypadek okaże
+specjalnym przypadkiem problemu zawinięcia sekwencji. Rozpatruje się skończony ciąg $s$, który zawiera $n^{3}$ typów $H$, które są idealnie włożone w kostkę rozmiaru $n \times n \times n$. Jeśli ten przypadek z taką kostką okaże
 się dosyć trudny, to oznacza, że nasz problem także jest trudny. 
+
+Przy poszukiwaniu optymalnego zajęcia, można czynić coś istotnie mądrzejszego niż konstruowanie losowego zagięcia. Jednym z podjeść jest oznaczanie tras, którymi się już przechodziło i które nie dały interesującego zagięcia. Taki pomysł stosowany jest w algorytmie Monte Carlo Tree Search. W tej metodzie stosuję się tzw. drzewo możliwych zagięć. Drzewo przeszukujemy stosując odpowiednie wagi dla wierzchołków obliczone na podstawie wcześniejszych symulacji zagięć. Każdą wagę wierzchołka w drzewie zwiększamy w kolejnych krokach, dbając o to, żeby przeszukiwanie drzewa było zbalansowane, tzn. staramy się dbać o różnorodność tras w drzewie możliwych zagięć. 
 
 
 \end{document}
