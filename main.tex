@@ -65,14 +65,14 @@ reprezentowane przez
 zagięcie danej skończonej sekwencji $s \in\{H, P\}^{k}$ w
 kracie $L=\mathbb{Z}^{3}$ lub $L=\mathbb{Z}^2$.
 \textit{Zagięcie} to przekształcenie różnowartościowe $\omega:\{1,
-\ldots,n\} \rightarrow L$ takie, że sąsiednie liczby odpowiadają sąsiednim
+\ldots,k\} \rightarrow L$ takie, że sąsiednie liczby odpowiadają sąsiednim
 punktom z kraty, tzn.
 \begin{equation*}
 		 \omega(i) \neq \omega(j)
 		 \quad\textrm{oraz}\quad
 		 |\omega(i)-\omega(i+1)|=1
 		 \quad\textrm{dla }
-     1 \leq i<j \leq n, 
+     1 \leq i<j \leq k, 
 \end{equation*}
 przy czym $|p-q|$ to zwyczajna (euklidesowa) odległość między punktami
 $p$ i $q$.
@@ -150,7 +150,17 @@ pewnego ogólniejszego problemu decyzyjnego, który się później okaże, jest
 specjalnym przypadkiem problemu zawinięcia sekwencji. Rozpatruje się skończony ciąg $s$, który zawiera $n^{3}$ typów $H$, które są idealnie włożone w kostkę rozmiaru $n \times n \times n$. Jeśli ten przypadek z taką kostką okaże
 się dosyć trudny, to oznacza, że nasz problem także jest trudny. 
 
-Przy poszukiwaniu optymalnego zajęcia, można czynić coś istotnie mądrzejszego niż konstruowanie losowego zagięcia. Jednym z podjeść jest oznaczanie tras, którymi się już przechodziło i które nie dały interesującego zagięcia. Taki pomysł stosowany jest w algorytmie Monte Carlo Tree Search. W tej metodzie stosuję się tzw. drzewo możliwych zagięć. Drzewo przeszukujemy stosując odpowiednie wagi dla wierzchołków obliczone na podstawie wcześniejszych symulacji zagięć. Każdą wagę wierzchołka w drzewie zwiększamy w kolejnych krokach, dbając o to, żeby przeszukiwanie drzewa było zbalansowane, tzn. staramy się dbać o różnorodność tras w drzewie możliwych zagięć. 
+Przy poszukiwaniu optymalnego zajęcia, można czynić coś istotnie mądrzejszego niż konstruowanie losowego zagięcia. Jednym z podjeść jest oznaczanie tras, którymi się już przechodziło i które nie dały interesującego zagięcia. Taki pomysł stosowany jest w algorytmie Monte Carlo Tree Search. Ten algorytm został między-innymi wykorzystany w słynnej pracy Alpha Go. W listopadzie 2015 roku jako pierwszy automat, Alpha Go pokonał zawodowego gracza w grę Go, Fan Hui,w pięciorundowym pojedynku na pełnej planszy w równej grze. AlphaGo był początkowo szkolony na archiwalnych grach, aby naśladować styl gry graczy, wykorzystując bazę danych około 30 milionów ruchów. 
 
+W tej metodzie stosuję się tzw. drzewo możliwych ruchów. Drzewo przeszukujemy stosując odpowiednie wagi dla wierzchołków obliczone na podstawie wcześniejszych symulacji ruchów. Każdą wagę wierzchołka w drzewie zwiększamy w kolejnych krokach, dbając o to, żeby przeszukiwanie drzewa było zbalansowane, tzn. staramy się dbać o różnorodność tras w drzewie możliwych ruchów. W szczegółach algorytm podzielony jest na 4 fazy: 
+\begin{enumerate}
+\item \textit{Wyboru}: rozpoczynamy od korzenia drzewa $R$ i wybieramy kolejne węzły potomne, aż do osiągnięcia węzła liściowego $L$. Korzeń to aktualny stan gry, a węzeł liściasty to każdy węzeł, który ma potencjalne dziecko, od którego nie rozpoczęto jeszcze symulacji (rozgrywki). Sposób wyboru węzłów podrzędnych, pozwala na rozszerzanie drzewa możliwych ruchów w kierunku najbardziej obiecujących ruchów,
+\item \textit{Rozszerzania}: jeśli $L$ nie kończy gry w sposób decydujący (np. wygrana/przegrana/remis) dla żadnego z graczy, należy utworzyć jeden (lub więcej) węzłów potomnych i wybrać węzeł $C$ z jednego z nich. Węzłami podrzędnymi są dowolne prawidłowe ruchy z pozycji w grze określonej przez $L$.
+\item  \textit{Symulacji}: wykonaj jedną losową rozgrywkę z węzła $C$. Ten krok jest czasem nazywany również playout lub rollout. Rozgrywka może być tak prosta, jak wybieranie jednakowych losowych ruchów aż do rozstrzygnięcia gry: wygrana, przegrana lub remis.
+\item \textit{Propagacji wstecznej}: wykorzystanie wyniku rozgrywki do aktualizacji informacji w węzłach na ścieżce od $C$ do $R$.
+\end{enumerate}
+Monte Carlo Tree Search dla modelu hydrofobowo-polarnego na każdym etapie działania algorytmu mamy pewną sprawdzoną bazę dotychczasowych ruchów, czyli zawinięć częściowych. Każdy z zawinięć ma obliczone dotychczasowe empiryczne oszacowanie jakości. Następnie w fazie wyboru dochodzimy do częściowego zawinięcia, którego jeszcze dalej nie badaliśmy (za każdym razem, począwszy od korzenia $R$, wybierając skręt, który maksymalizuje specjalną funkcję równoważenia eksploatacji i eksploracji drzewa. Następnie dokładamy do sprawdzonej bazy losowy skręt, i począwszy od tego skrętu symulujemy losowo do końca (faza symulacji) - nasza nagroda za symulacje powiązana jest z energią uzyskanego pełnego zawinięcia długości $k$. Dalej uaktualniamy empiryczne oszacowanie jakości dotychczasowych zwinięć częściowych, czyli wykonujemy krok propagacji wstecznej. 
+
+To wszystko pokazuje, że algorytmy losowe mają ciekawe zastosowanie praktyczne, które przydaje się w poszukiwaniu przybliżonych rozwiązań dla określonych modeli. Sam model hydrofobowo-polarny ma bardzo ciekawe teoretyczne wyniki, a jego sformułowanie dotyka istoty informatyki statystyki i matematyki.  
 
 \end{document}
